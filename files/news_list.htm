@@ -1,0 +1,42 @@
+<div class="news-box">
+  {% IF FORM_NOTICE %}<div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>{% ENDIF %}
+  
+  {%IF news_list_empty %}
+    <div class="attention">Пока нет, но обязательно будут</div>
+  {%ELSE%}
+    
+    <h4 class="title">{NEWS_SECTION_NAME}</h4>
+    
+    <!-- Список новостей -->
+    {% FOR news_list %}
+      <div class="news"> 
+        <h5 class="title"><a href="{news_list.URL}" title="Перейти к странице новости">{news_list.TITLE}</a></h5>
+        {% IF news_list.SHOW_TIME %}<div class="news-time">{news_list.TIME | date("d.m.Y")}</div>{% ENDIF %} 
+        {% IF news_list.TEXT_SHORT %}<div class="news-content"><p>{news_list.TEXT_SHORT}</p></div>{% ENDIF %} 
+      </div>
+    {% ENDFOR %}
+    
+    <!-- Страницы -->
+    {% IF show_pages %}
+    <div class="pagination">
+      <div class="links">
+        {% IF NEWS_PAGES_SHOW_PREVIOUS %}   
+          <a class="previous_page" href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_PREVIOUS}" title="Предыдущая страница"><</a>
+        {% ENDIF %}
+        {% FOR news_pages %}
+          {% IF news_pages.CURRENT %}
+            <b>{news_pages.PAGE}</b>
+          {% ELSE %}
+            <a href="?sid={NEWS_SECTION_ID}&page={news_pages.PAGE}">{news_pages.PAGE}</a>
+          {% ENDIF %}
+        {% ENDFOR %}
+        {% IF NEWS_PAGES_SHOW_NEXT %}
+          <a class="next_page" href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_NEXT}" title="Следующая страница">></a> 
+        {% ENDIF %}
+      </div>
+    </div>
+    {% ENDIF %}
+    <!-- /Страницы -->
+  {% ENDIF %}
+
+</div>

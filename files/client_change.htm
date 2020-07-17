@@ -1,0 +1,7 @@
+<div class="account">
+{% IF FORM_NOTICE %}<div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>{% ENDIF %}
+
+  <div class="information location" rel="{USER_LOGIN_URL}">
+    <span>Через <span id="time" rel="10">10</span> секунд вы будете перенаправлены на страницу <a href="{USER_LOGIN_URL}" title="Вход в личный кабинет">входа в личный кабинет</a></span>
+  </div>
+</div>
